@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>看懂西式建築風格：古羅馬、哥德式與巴洛克</title>
+  <style>
+    :root {
+      --bg-page: #f4f3ef;
+      --card-bg: #ffffff;
+      --text-main: #1f2328;
+      --text-muted: #59636e;
+      --border-light: #e2e0d8;
+      --accent-default: #334155;
+      --accent-default-soft: #f1f5f9;
+      --accent-roman: #9a3412;
+      --accent-roman-soft: #fff7ed;
+      --accent-gothic: #1e3a8a;
+      --accent-gothic-soft: #eff6ff;
+      --accent-baroque: #6b21a8;
+      --accent-baroque-soft: #faf5ff;
+      --warn-bg: #fefce8;
+      --warn-border: #fde047;
+      --warn-text: #854d0e;
+      --ai-bg: #f8fafc;
+      --ai-border: #cbd5e1;
+      --ai-text: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .deck-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 16px 88px;
+    }
+
+    .slide {
+      display: none;
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      padding: 28px 32px 24px;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100vh - 116px);
+      border-top: 8px solid var(--theme-color, var(--accent-default));
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .theme-default {
+      --theme-color: var(--accent-default);
+      --theme-soft: var(--accent-default-soft);
+    }
+
+    .theme-roman {
+      --theme-color: var(--accent-roman);
+      --theme-soft: var(--accent-roman-soft);
+    }
+
+    .theme-gothic {
+      --theme-color: var(--accent-gothic);
+      --theme-soft: var(--accent-gothic-soft);
+    }
+
+    .theme-baroque {
+      --theme-color: var(--accent-baroque);
+      --theme-soft: var(--accent-baroque-soft);
+    }
+
+    .slide-header {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .style-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background-color: var(--theme-soft);
+      color: var(--theme-color);
+      margin-bottom: 8px;
+    }
+
+    h1.slide-title {
+      font-size: 1.55rem;
+      line-height: 1.35;
+      color: var(--theme-color);
+      font-weight: 700;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 1rem;
+    }
+
+    /* Cover Slide */
+    .cover-layout {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px 12px;
+    }
+
+    .cover-layout .cover-tag {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--accent-default-soft);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .cover-layout h1 {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .cover-layout .cover-sub {
+      font-size: 1.2rem;
+      color: var(--accent-default);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .cover-layout .cover-guide {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    .cover-swatches {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .swatch {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .swatch.roman {
+      background: var(--accent-roman-soft);
+      color: var(--accent-roman);
+      border: 1px solid #fed7aa;
+    }
+
+    .swatch.gothic {
+      background: var(--accent-gothic-soft);
+      color: var(--accent-gothic);
+      border: 1px solid #bfdbfe;
+    }
+
+    .swatch.baroque {
+      background: var(--accent-baroque-soft);
+      color: var(--accent-baroque);
+      border: 1px solid #e9d5ff;
+    }
+
+    /* Lists & Blocks */
+    ul.bullet-list, ol.bullet-list {
+      padding-left: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    ul.sub-list {
+      padding-left: 1.25rem;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      list-style-type: circle;
+    }
+
+    .ai-note {
+      background-color: var(--ai-bg);
+      border-left: 3px solid var(--theme-color);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      color: var(--ai-text);
+      font-size: 0.94rem;
+      margin-top: 4px;
+    }
+
+    .mnemonic-box {
+      background-color: var(--theme-soft);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--theme-color);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--theme-color);
+      margin-top: 4px;
+    }
+
+    .warning-box {
+      background-color: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.94rem;
+    }
+
+    .section-box {
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: #fcfcfb;
+    }
+
+    .section-box h3 {
+      font-size: 1.02rem;
+      color: var(--theme-color);
+      margin-bottom: 6px;
+    }
+
+    /* Inline SVG Diagram Wrapper */
+    .diagram-box {
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px 14px 10px;
+      background: #ffffff;
+    }
+
+    .diagram-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .diagram-scroll svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .diagram-scroll svg.svg-wide {
+      min-width: 680px;
+    }
+
+    .diagram-caption {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Tables */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    th {
+      background-color: var(--theme-soft);
+      color: var(--theme-color);
+      font-weight: 700;
+    }
+
+    th.col-roman {
+      background-color: var(--accent-roman-soft);
+      color: var(--accent-roman);
+    }
+
+    th.col-gothic {
+      background-color: var(--accent-gothic-soft);
+      color: var(--accent-gothic);
+    }
+
+    th.col-baroque {
+      background-color: var(--accent-baroque-soft);
+      color: var(--accent-baroque);
+    }
+
+    /* Quiz Toggle */
+    .quiz-item {
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: #fcfcfb;
+    }
+
+    .quiz-answer {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-light);
+      color: var(--accent-default);
+    }
+
+    .quiz-answer.hidden {
+      display: none;
+    }
+
+    .toggle-ans-btn {
+      margin-top: 8px;
+      background: var(--accent-default-soft);
+      color: var(--accent-default);
+      border: 1px solid var(--ai-border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .toggle-ans-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Footer */
+    .slide-footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation Bar */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid var(--border-light);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-btn {
+      background-color: var(--accent-default);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .nav-btn:not(:disabled):hover {
+      opacity: 0.88;
+    }
+
+    .page-indicator {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      min-width: 90px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .deck-container {
+        padding: 10px 10px 80px;
+      }
+
+      .slide {
+        padding: 20px 18px 18px;
+        min-height: calc(100vh - 96px);
+      }
+
+      h1.slide-title {
+        font-size: 1.25rem;
+      }
+
+      .cover-layout h1 {
+        font-size: 1.55rem;
+      }
+
+      .slide-body {
+        font-size: 0.95rem;
+      }
+
+      th, td {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="deck-container">
+
+    <!-- P01 -->
+    <section class="slide theme-default active" data-page="1">
+      <div class="slide-body cover-layout">
+        <div class="cover-tag">P01｜封面（AI 補充）</div>
+        <h1>看懂西式建築風格：古羅馬、哥德式與巴洛克</h1>
+        <p class="cover-sub">給初學者的建築觀察入門指南</p>
+        <p class="cover-guide">從結構、光影到地標，一次掌握三大經典風格</p>
+        <div class="cover-swatches">
+          <span class="swatch roman">古羅馬建築</span>
+          <span class="swatch gothic">哥德式建築</span>
+          <span class="swatch baroque">巴洛克建築</span>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：index.md（AI 補充過場文字）</span>
+        <span>來源卡片：無（AI 補充過場文字）｜第 1 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P02 -->
+    <section class="slide theme-default" data-page="2">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">課程導覽</span>
+          <h1 class="slide-title">P02｜學習目標與三大風格時間軸導覽</h1>
+        </header>
+        <div class="slide-body">
+          <div class="section-box">
+            <h3>學習目標（AI 補充）</h3>
+            <ol class="bullet-list">
+              <li>認識古羅馬、哥德式與巴洛克建築的時代背景與三大視覺特徵。</li>
+              <li>學會用 3 個步驟辨識建築風格，並看懂代表地標。</li>
+            </ol>
+          </div>
+
+          <div class="diagram-box">
+            <div class="diagram-scroll">
+              <svg class="svg-wide" viewBox="0 0 900 175" role="img" aria-label="三大建築風格時間軸示意圖">
+                <defs>
+                  <marker id="timeline-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                  </marker>
+                </defs>
+                <!-- Axis Line -->
+                <line x1="36" y1="88" x2="868" y2="88" stroke="#94a3b8" stroke-width="3" marker-end="url(#timeline-arrow)" />
+
+                <!-- Segment 1: Ancient Roman -->
+                <rect x="44" y="14" width="252" height="58" rx="8" fill="#fff7ed" stroke="#9a3412" stroke-width="1.5" />
+                <text x="170" y="37" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="700">古羅馬建築</text>
+                <text x="170" y="59" text-anchor="middle" fill="#7c2d12" font-size="12.5">西元前 509 年共和政體｜西元前 27 年帝國時代</text>
+                <line x1="170" y1="72" x2="170" y2="88" stroke="#9a3412" stroke-width="2" />
+                <circle cx="170" cy="88" r="6" fill="#9a3412" />
+                <rect x="62" y="102" width="216" height="44" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" />
+                <text x="170" y="121" text-anchor="middle" fill="#9a3412" font-size="12">西元前 509 年共和政體</text>
+                <text x="170" y="138" text-anchor="middle" fill="#9a3412" font-size="12">西元前 27 年進入帝國時代</text>
+
+                <!-- Segment 2: Gothic -->
+                <rect x="332" y="14" width="236" height="58" rx="8" fill="#eff6ff" stroke="#1e3a8a" stroke-width="1.5" />
+                <text x="450" y="37" text-anchor="middle" fill="#1e3a8a" font-size="15" font-weight="700">哥德式建築</text>
+                <text x="450" y="59" text-anchor="middle" fill="#1e40af" font-size="12.5">12 世紀起源於法國</text>
+                <line x1="450" y1="72" x2="450" y2="88" stroke="#1e3a8a" stroke-width="2" />
+                <circle cx="450" cy="88" r="6" fill="#1e3a8a" />
+                <rect x="352" y="102" width="196" height="36" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+                <text x="450" y="125" text-anchor="middle" fill="#1e3a8a" font-size="12.5">12 世紀起源於法國</text>
+
+                <!-- Segment 3: Baroque -->
+                <rect x="604" y="14" width="244" height="58" rx="8" fill="#faf5ff" stroke="#6b21a8" stroke-width="1.5" />
+                <text x="726" y="37" text-anchor="middle" fill="#6b21a8" font-size="15" font-weight="700">巴洛克建築</text>
+                <text x="726" y="59" text-anchor="middle" fill="#581c87" font-size="12.5">17 世紀起源於義大利</text>
+                <line x1="726" y1="72" x2="726" y2="88" stroke="#6b21a8" stroke-width="2" />
+                <circle cx="726" cy="88" r="6" fill="#6b21a8" />
+                <rect x="624" y="102" width="204" height="36" rx="6" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1" />
+                <text x="726" y="125" text-anchor="middle" fill="#6b21a8" font-size="12.5">17 世紀起源於義大利</text>
+              </svg>
+            </div>
+            <p class="diagram-caption">示意圖（AI 補充，非原始來源）</p>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 22%;">建築風格</th>
+                  <th>歷史演進時間軸</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>古羅馬建築</strong></td>
+                  <td>西元前 509 年開始實行共和政體，西元前 27 年步入帝國時代，在西元 1 到 3 世紀達到奴隸制時代全世界建築的頂峰。</td>
+                </tr>
+                <tr>
+                  <td><strong>哥德式建築</strong></td>
+                  <td>發源於 12 世紀的法國，持續至 16 世紀，由羅馬式建築發展而來，為文藝復興建築所繼承。</td>
+                </tr>
+                <tr>
+                  <td><strong>巴洛克建築</strong></td>
+                  <td>起源於 17 世紀的義大利，並逐漸傳遍歐洲，將文藝復興建築添上新的華麗、誇張風氣。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="warning-box">
+            <strong>閱讀提醒（⚠️ 單一來源，可靠度較低）</strong>
+            <ul class="bullet-list" style="margin-top: 6px;">
+              <li>建築風格具有繼承、融合、借鑑或並存的特性，同一座建築物也可能同時存在多種風格。</li>
+              <li>巴洛克與洛可可等風格有時主要體現在室內空間，造成同一棟建築內外風格不一致，不能單憑外觀或室內單一元素判斷整體樣貌。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：01-ancient-roman.md、02-gothic.md、03-baroque.md、04-style-comparison.md</span>
+        <span>來源卡片：C01、C02、C20、C21、C39、C61、C62｜第 2 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P03 -->
+    <section class="slide theme-roman" data-page="3">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">古羅馬建築</span>
+          <h1 class="slide-title">P03｜古羅馬建築（一）：時代背景與誕生動機</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li><strong>成就頂峰</strong>：直接繼承古希臘晚期的建築成就並向前推進，在西元 1 到 3 世紀達到奴隸制時代全世界建築的頂峰。</li>
+            <li><strong>政體演進</strong>：原為亞平寧半島中部西岸小城邦，西元前 509 年進入羅馬共和國時代，西元前 27 年步入帝國時代；在「羅馬和平時期」，大型建築工程遍布帝國各地，最重要的工程集中在羅馬城內。</li>
+            <li><strong>抗震需求推動技術突破</strong>：亞平寧半島經常火山爆發且伴生地震，古埃及與古希臘的簡單梁柱體系結構薄弱，無法抵禦地震產生的拉力和扭矩，促使羅馬人在結構力學和材料學上取得突破，創造出寬敞的室內空間。</li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：01-ancient-roman.md</span>
+        <span>來源卡片：C01、C02、C03｜第 3 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P04 -->
+    <section class="slide theme-roman" data-page="4">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">古羅馬建築</span>
+          <h1 class="slide-title">P04｜古羅馬建築（二）：三大視覺招牌</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>① 天然混凝土革命（Opus caementitium）</strong>：使用砂漿黏合石塊並添加活性火山灰，發展出由火山灰、石灰和碎石構成的天然混凝土；西元前 2 世紀成為可獨立使用的建材，西元前 1 世紀中葉成為券拱中唯一的結構材料。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「想像做烘焙時把麵糊倒進烤模：羅馬人把火山灰混凝土澆鑄進木模中，硬化後形成一體成型的人造巨石，大幅降低了對石材精密切割的依賴。」</div>
+            </li>
+            <li>
+              <strong>② 券拱與拱頂系統</strong>：利用券拱將拉應力轉化為壓應力，加寬券拱可得到「筒形拱頂」，使用混凝土亦使建造應力均勻分散的「穹頂」成為可能，形成集中式內部空間。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「拱門將天花板的下壓力量轉化為向側下方的擠壓力，讓建材互相緊扣，從而能夠跨越寬廣空間，不再需要密密麻麻的柱子支撐。」</div>
+            </li>
+            <li>
+              <strong>③ 模數化柱式與平板玻璃窗</strong>：繼承古希臘柱式，添加托斯干柱式並發明「複合柱式」，細部比例模數化；最晚在西元 1 世紀，大型公共建築已使用平板玻璃，使室內第一次變得明亮。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「柱子不再是石匠隨興發揮，而是具備標準規格公差；而平板玻璃窗的出現，更讓大型室內空間告別了昏暗與煙燻，迎來自然光線。」</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：01-ancient-roman.md</span>
+        <span>來源卡片：C04、C05、C06、C07、C08、C09、C10｜第 4 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P05 -->
+    <section class="slide theme-roman" data-page="5">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">古羅馬建築</span>
+          <h1 class="slide-title">P05｜古羅馬建築（三）：代表地標與速記口訣</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>羅馬競技場（Colosseum）</strong>：原名弗萊文圓形劇場，建於西元 72 至 82 年間，可容納 5 萬至 8 萬名觀眾，使用洞石、凝灰岩及磚飾面的混凝土建造。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：站在外圍仰望巨大的多層連續拱門立面，走入內部感受古代最大圓形劇場的龐大容量與震撼空間感。</div>
+            </li>
+            <li>
+              <strong>萬神殿（Pantheon）</strong>：西元 609 年更名為聖母與諸殉道者教堂；其圓頂是世界上最大的無樑圓頂之一，上方天窗被稱為「上帝的眼睛」，幾何比例被米開朗基羅譽為「天使的設計」。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：走進完全沒有任何立柱支撐的巨大圓形大廳，仰望穹頂中央圓形天窗灑落的單一束光，體會極致的幾何對稱與光影神聖感。</div>
+            </li>
+            <li>
+              <strong>圖拉真市場（Mercati di Traiano）</strong>：建於西元 100 至 110 年間，由大馬士革的阿波羅多洛斯負責建造，採用磚塊和混凝土構築，被譽為世界上最早的購物中心。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：在半圓形的多層磚石遺跡前駐足，觀察古羅馬如何以堅固的磚與混凝土構造規劃出先進的多層商貿空間。</div>
+            </li>
+            <li>
+              <strong>早期券拱公共工程</strong>：馬爾采輸水渠（建於西元前 144 至前 140 年，有 10 千米架設在發券上，最大跨度 15 米）與法勃里契橋（建於西元前 62 年，單拱跨度 24.5 米）。
+            </li>
+          </ul>
+          <div class="mnemonic-box">速記口訣（AI 補充）：「競技場上圓拱疊，萬神殿頂望天眼，磚石泥漿築千年。」</div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：01-ancient-roman.md</span>
+        <span>來源卡片：C11、C12、C13、C14、C15、C16、C17、C19｜第 5 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P06 -->
+    <section class="slide theme-gothic" data-page="6">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">哥德式建築</span>
+          <h1 class="slide-title">P06｜哥德式建築（一）：時代背景與誕生動機</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li><strong>風格與情感</strong>：興盛於歐洲中世紀高峰與末期，由羅馬式建築發展而來，整體風格高聳削瘦，表現神秘、哀婉、崇高的強烈情感。</li>
+            <li><strong>名稱由來</strong>：12 世紀發源於法國，持續至 16 世紀，當代普遍被稱作「法國式」；「哥德式」一詞於文藝復興後期出現，喬爾喬·瓦薩里在《藝苑名人傳》中以「野蠻的日耳曼風格」形容此風格。</li>
+            <li><strong>發展歷程</strong>：近西元 1003 年起歐洲各地興起整修教會建築風潮；1143 年在巴黎建成第一座哥德式教堂「聖丹尼斯教堂」，1350 年歐洲各國普遍進入哥德晚期。</li>
+            <li><strong>信仰與後世影響</strong>：「高」是中世紀人們信仰的表現，細長柱子與箭頭般的尖拱營造直達天堂的神聖空間感；其向上延伸感、細長線條與大面積窗戶，後來亦啟發了紐約、芝加哥早期摩天大樓的設計。</li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：02-gothic.md</span>
+        <span>來源卡片：C20、C21、C22、C23｜第 6 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P07 -->
+    <section class="slide theme-gothic" data-page="7">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">哥德式建築</span>
+          <h1 class="slide-title">P07｜哥德式建築（二）：三大視覺招牌</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>① 尖肋拱頂與肋架券</strong>：從圓筒拱頂改為尖肋拱頂，沿拱頂弧面邊緣架設加強的肋架券，使拱頂其餘部分（「蹼」，厚度 25 至 30 公分）不再承重，推力集中作用於四個拱底石上，使拱頂可建得又大又高並具向上視覺暗示。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「就像撐開雨傘的堅硬傘骨：肋架券將所有屋頂重量集中導向特定支撐點，其餘弧面像傘布一樣輕薄，因此天花板能徹底擺脫厚重石堆，直衝雲霄。」</div>
+            </li>
+            <li>
+              <strong>② 飛扶壁（Flying Buttress）</strong>：把原本實心、被屋頂遮蓋的扶壁露在外面稱為飛扶壁，室外密布支撐部件，仿佛沒有拆卸的鷹架，扶拱垛上往往有繁複裝飾雕刻，高聳峭拔。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「就像建築在室外裝上了斜向伸展的『外骨骼』或拐杖：原本需要幾公尺厚的石牆才能擋住的推力，全被室外一排排凌空架起的拱橋支架接走，解放了室內空間。」</div>
+            </li>
+            <li>
+              <strong>③ 花窗玻璃與框架受力體系</strong>：結構轉變為接近框架的受力體系，框架之外極為輕薄，可以不砌牆、完全用大面積排窗填充；彩色玻璃以紅、藍二色為主（藍色象徵天國，紅色象徵基督的鮮血），細長窗戶稱「柳葉窗」，圓形稱「玫瑰窗」，造就室內神秘燦爛的明亮景象。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「相當於現代鋼骨玻璃帷幕大樓的中世紀石造版本：牆壁幾乎消失，被巨大的彩色玻璃窗取代，光線穿透時如同神性降臨人間。」</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：02-gothic.md</span>
+        <span>來源卡片：C24、C25、C26、C28、C29、C31｜第 7 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P08 -->
+    <section class="slide theme-gothic" data-page="8">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">哥德式建築</span>
+          <h1 class="slide-title">P08｜哥德式建築（三）：代表地標與速記口訣</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>巴黎聖母院（Notre-Dame de Paris）</strong>：經典哥德式教堂，原計畫正面有兩個高尖塔，最後只蓋了兩個方方正正的基座就停工驗收，反而成為讓人一眼認出的獨特外觀。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：站在西立面廣場前，觀察雙塔未加蓋尖塔頂的方正外形，並欣賞中央精緻巨大的圓形玫瑰花窗。</div>
+            </li>
+            <li>
+              <strong>聖丹尼斯教堂（Basilique Saint-Denis）</strong>：1143 年在巴黎建成的第一座哥德式教堂，其四尖券結構與花窗玻璃為各國教堂廣泛效法，並首次用這種結構覆蓋環廊和耳室。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：站在環廊與耳室下方，仰望歷史上第一座將尖券、肋架拱頂與彩繪玻璃完美融合的空間結構，見證哥德風格誕生的起點。</div>
+            </li>
+            <li>
+              <strong>飛扶壁特色大教堂</strong>：亞眠大教堂的扶拱垛設計有兩道拱壁；沙特爾大教堂用橫向小連拱廊增加扶壁抗力；波微大教堂採用雙進拱橋增加扶拱垛承受力。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：在教堂外側環繞漫步，對比各座大教堂如何運用兩道拱壁或連拱廊等不同的飛券形式，欣賞如琴鍵或鷹架般向外延伸的石雕力學結構。</div>
+            </li>
+          </ul>
+          <div class="mnemonic-box">速記口訣（AI 補充）：「尖拱骨架向上引，飛扶壁外撐，彩窗透天國。」</div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：02-gothic.md</span>
+        <span>來源卡片：C32、C33、C34、C35、C36、C37、C38｜第 8 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P09 -->
+    <section class="slide theme-baroque" data-page="9">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">巴洛克建築</span>
+          <h1 class="slide-title">P09｜巴洛克建築（一）：時代背景與歷史分期</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li><strong>時代動機</strong>：起源於 17 世紀的義大利並傳遍歐洲，將人文主義的文藝復興建築添上華麗、誇張風氣，彰顯國家與教會專制主義的豐功偉業，並體現天主教新修會（如戴蒂尼會與耶穌會）增進宗教普遍與虔誠的目標。</li>
+            <li><strong>空間劇場感</strong>：將文藝復興的比例與理性推向強烈的戲劇性、空間張力與光影效果，用拉長的中軸、起伏立面、連續拱廊、穹頂與廣場設計，讓人一走進空間就像被建築「帶進劇場」。</li>
+            <li>
+              <strong>歷史分期演進</strong>：
+              <ul class="sub-list">
+                <li><strong>早期巴洛克（約 1600–1625 年）</strong>：出現在羅馬，轉向戲劇性與動感，特點為複雜平面、統一空間、起伏立面與大型天花板壁畫。</li>
+                <li><strong>高巴洛克（約 1625–1675 年）</strong>：融入更多運動感與空間複雜性，展現極端光影對比，代表建築師為吉安·洛倫佐·貝尼尼與弗朗切斯科·博羅米尼。</li>
+                <li><strong>晚期巴洛克（約 1675–1750 年）</strong>：更具裝飾性，出現洛可可變體，強調不對稱、淺色調與俏皮形式，代表為巴爾塔薩·諾伊曼。</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：03-baroque.md</span>
+        <span>來源卡片：C39、C40、C41｜第 9 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P10 -->
+    <section class="slide theme-baroque" data-page="10">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">巴洛克建築</span>
+          <h1 class="slide-title">P10｜巴洛克建築（二）：三大視覺招牌</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>① 戲劇性光影與強烈明暗對照</strong>：著重色彩、光影與雕刻，戲劇性地使用光線產生強烈光影對比與明暗對照效果（如威爾騰堡修道院教堂），或依靠窗戶實現均勻照明（如溫加滕修道院教堂）。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「就像舞台劇聚光燈打在主角臉上：建築師不再追求均勻平淡的採光，而是巧妙運用深凹的壁龕與強光照射，讓光線與陰影在室內產生強烈戲劇衝突。」</div>
+            </li>
+            <li>
+              <strong>② 動態起伏立面與中央突出部分</strong>：外部立面通常有戲劇性的中央突出部分；激進巴洛克風格具有彎曲牆面與交叉的橢圓形空間特點，空間配置上以寬闊或圓形的中殿取代狹長中殿。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「牆壁不再是一面平直呆板的石牆，而是像波浪般向前推進與向內凹陷，中央立面彷彿具有向外跨步的動勢，打破了文藝復興的靜止平衡。」</div>
+            </li>
+            <li>
+              <strong>③ 繁複裝飾與虛幻錯視畫法（四分視投影）</strong>：大量使用鍍金、石膏、大理石等裝飾品並繪製巨大天花板壁畫；運用「四分視投影」（Quadratura）將平面天花板或牆壁繪製成三維空間，增加空間深度和規模感。
+              <div class="ai-note"><strong>AI 補充（教學比喻）</strong>：「抬頭仰望天花板時，肉眼難以分辨哪裡是立體石膏雕飾、哪裡是平面油畫；天花板上的天空與天使彷彿打破了屋頂邊界，營造出無限延伸的魔幻空間感。」</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：03-baroque.md</span>
+        <span>來源卡片：C42、C44、C45、C47、C48、C49｜第 10 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P11 -->
+    <section class="slide theme-baroque" data-page="11">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">巴洛克建築</span>
+          <h1 class="slide-title">P11｜巴洛克建築（三）：代表地標與在地轉譯</h1>
+        </header>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li>
+              <strong>凡爾賽宮（Château de Versailles）</strong>：擴建於 1661 至 1690 年（列表標示延續至 1774 年），由皇宮、花園和露臺組成，體現絕對君主制與「偉大的協調」概念，成為許多歐洲宮殿典範。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：觀察宏偉中軸線如何將龐大的宮殿立面與延伸至地平線的幾何花園融為一體，體會君王將整片自然地景納入建築秩序的權威震撼。</div>
+            </li>
+            <li>
+              <strong>聖彼得大教堂（St. Peter's Basilica）</strong>：世界上最大的教堂與天主教象徵，巴洛克風格體現在貝尼尼設計的壯觀聖體傘與大教堂廣場上。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：漫步在貝尼尼設計的巨大橢圓柱廊廣場，仰望大教堂宏偉立面，並走進內部欣賞青銅螺旋立柱的壯麗聖體傘。</div>
+            </li>
+            <li>
+              <strong>四泉聖嘉祿堂（San Carlo alle Quattro Fontane）</strong>：位於義大利羅馬，建於 1665 至 1676 年，由弗朗切斯科·博羅米尼設計，列為典型巴洛克建築之一。
+            </li>
+            <li>
+              <strong>羅馬聖依納爵教堂（Church of St. Ignatius）</strong>：安德烈亞·保薩諾在天花板繪製壁畫，畫中建築與人物彷彿向上延伸進天花板，是四分視投影（Quadratura）的經典應用。
+              <div class="ai-note"><strong>AI 補充（打卡看點）</strong>：站在教堂中殿地面指定的圓形標記點抬頭仰望，體驗完全平整的天花板如何藉由高超透視法「憑空長出一座挑高穹頂」。</div>
+            </li>
+            <li>
+              <strong>在地化延伸：台灣仿巴洛克老街街屋</strong>：日治時期商業街屋受西洋樣式影響形成「仿巴洛克」或「巴洛克式牌樓厝」，具有紅磚、騎樓、牌樓式山牆與泥塑花飾並混入閩南傳統圖案（如大溪老街、台南新化老街）。
+            </li>
+          </ul>
+          <div class="mnemonic-box">速記口訣（AI 補充）：「立面起伏如波浪，強光濃影如劇場，錯視穹頂通天堂。」</div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：03-baroque.md</span>
+        <span>來源卡片：C50、C51、C52、C53、C54、C56、C57、C58、C60｜第 11 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P12 -->
+    <section class="slide theme-default" data-page="12">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">橫向總整理</span>
+          <h1 class="slide-title">P12｜三大建築風格橫向綜合對照</h1>
+        </header>
+        <div class="slide-body">
+          <div class="warning-box">
+            <strong>⚠️ 資料來源警示</strong>：本頁對照表整理自單一比較來源，可靠度較低，閱讀時請搭配各風格專頁互參。
+          </div>
+
+          <div class="diagram-box">
+            <div class="diagram-scroll">
+              <svg class="svg-wide" viewBox="0 0 900 185" role="img" aria-label="三大建築風格輪廓對照示意圖">
+                <!-- Card 1: Ancient Roman - Semicircular Arch -->
+                <rect x="24" y="10" width="268" height="165" rx="10" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5" />
+                <text x="158" y="34" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="700">古羅馬建築</text>
+                <!-- Thick wall + semicircular arch -->
+                <path d="M 88 134 L 88 52 L 228 52 L 228 134 L 196 134 L 196 92 A 38 38 0 0 0 120 92 L 120 134 Z" fill="#fdba74" stroke="#9a3412" stroke-width="2" />
+                <text x="158" y="160" text-anchor="middle" fill="#9a3412" font-size="13.5" font-weight="700">半圓拱</text>
+
+                <!-- Card 2: Gothic - Pointed Arch -->
+                <rect x="316" y="10" width="268" height="165" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5" />
+                <text x="450" y="34" text-anchor="middle" fill="#1e3a8a" font-size="15" font-weight="700">哥德式建築</text>
+                <!-- Slender piers + pointed arch -->
+                <path d="M 398 134 L 398 92 Q 398 58 450 44 Q 502 58 502 92 L 502 134" fill="none" stroke="#1e3a8a" stroke-width="5" stroke-linecap="round" />
+                <path d="M 412 134 L 412 94 Q 412 68 450 56 Q 488 68 488 94 L 488 134" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" />
+                <text x="450" y="160" text-anchor="middle" fill="#1e3a8a" font-size="13.5" font-weight="700">尖拱</text>
+
+                <!-- Card 3: Baroque - Undulating Curved Facade -->
+                <rect x="608" y="10" width="268" height="165" rx="10" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5" />
+                <text x="742" y="34" text-anchor="middle" fill="#6b21a8" font-size="15" font-weight="700">巴洛克建築</text>
+                <!-- Wavy undulating facade curves -->
+                <path d="M 656 64 C 686 46, 712 82, 742 64 C 772 46, 798 82, 828 64 L 828 124 C 798 142, 772 106, 742 124 C 712 142, 686 106, 656 124 Z" fill="#e9d5ff" stroke="#6b21a8" stroke-width="2.2" />
+                <path d="M 656 94 C 686 76, 712 112, 742 94 C 772 76, 798 112, 828 94" fill="none" stroke="#6b21a8" stroke-width="1.8" stroke-dasharray="4 3" />
+                <text x="742" y="160" text-anchor="middle" fill="#6b21a8" font-size="13.5" font-weight="700">波浪曲線立面</text>
+              </svg>
+            </div>
+            <p class="diagram-caption">示意圖（AI 補充，非原始來源）</p>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 17%;">比較維度</th>
+                  <th class="col-roman" style="width: 25%;">古羅馬建築</th>
+                  <th class="col-gothic" style="width: 27%;">哥德式建築（原文作「哥特式」）</th>
+                  <th class="col-baroque" style="width: 31%;">巴洛克建築（Baroque）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>時代與起源</strong></td>
+                  <td>古典時代（約公元前 8 世紀至公元 5 世紀）</td>
+                  <td>起源於 12 世紀法國，在羅曼式建築基礎上發展</td>
+                  <td>起源於 17 世紀羅馬，為反宗教改革（1517 年馬丁路德《九十五條論綱》後天主教廷重振權威）的產物</td>
+                </tr>
+                <tr>
+                  <td><strong>核心技術與結構</strong></td>
+                  <td>火山灰混凝土（模板澆築）、拱券、筒形拱、穹頂；仰賴拱券與厚牆承重，柱子多用於美觀</td>
+                  <td>尖拱（減少側推力）、肋拱（骨架支撐減輕拱頂重量）、飛扶壁（外側支撐將側推力導向地面）、束柱</td>
+                  <td>保留文藝復興對稱原則但削弱和諧感、強化動態張力；教堂為兼顧禮儀動線與集中式佈局，將平面改成橢圓形</td>
+                </tr>
+                <tr>
+                  <td><strong>建築類型與功能</strong></td>
+                  <td>鬥獸場、劇場、渠道系統、浴場、巴西利卡、凱旋門（反映城市規劃與公共生活）</td>
+                  <td>主要出現在教堂（造價高昂，只有教會具備資本；象徵教會權威與靈魂升天追求）</td>
+                  <td>教堂與宮殿（教會以奢華營造敬畏與崇拜感；法國王權延用至宮殿作為統治與表演舞台）</td>
+                </tr>
+                <tr>
+                  <td><strong>常見視覺元素</strong></td>
+                  <td>拱券、穹頂、柱式（含托斯卡納柱、複合柱）、厚牆、小窗、拱廊</td>
+                  <td>尖拱、飛扶壁、肋骨拱、大型玻璃花窗、尖塔、束柱、精緻浮雕（動植物、怪獸、聖經人物）</td>
+                  <td>曲線立面與簷口、耳狀造型裝飾、破裂式三角楣、繁飾浮雕（茛苕葉、天使、人物）、螺旋狀柱式；內部有鍍金或彩色大理石聖壇、錯視法壁畫、戲劇化雕像、強烈光影對比、鏡面與水晶吊燈</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：04-style-comparison.md</span>
+        <span>來源卡片：C63、C64、C65、C66｜第 12 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P13 -->
+    <section class="slide theme-default" data-page="13">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">實戰應用</span>
+          <h1 class="slide-title">P13｜初學者 3 步驟實戰辨識指南</h1>
+        </header>
+        <div class="slide-body">
+          <div class="diagram-box">
+            <div class="diagram-scroll">
+              <svg class="svg-wide" viewBox="0 0 920 325" role="img" aria-label="初學者 3 步驟實戰辨識決策樹流程圖">
+                <defs>
+                  <marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+                  </marker>
+                </defs>
+
+                <!-- Column Headers -->
+                <rect x="275" y="8" width="195" height="30" rx="6" fill="#fff7ed" stroke="#9a3412" stroke-width="1.5" />
+                <text x="372" y="28" text-anchor="middle" fill="#9a3412" font-size="13.5" font-weight="700">古羅馬建築</text>
+
+                <rect x="490" y="8" width="195" height="30" rx="6" fill="#eff6ff" stroke="#1e3a8a" stroke-width="1.5" />
+                <text x="587" y="28" text-anchor="middle" fill="#1e3a8a" font-size="13.5" font-weight="700">哥德式建築</text>
+
+                <rect x="705" y="8" width="205" height="30" rx="6" fill="#faf5ff" stroke="#6b21a8" stroke-width="1.5" />
+                <text x="807" y="28" text-anchor="middle" fill="#6b21a8" font-size="13.5" font-weight="700">巴洛克建築</text>
+
+                <!-- Step 1 -->
+                <rect x="10" y="50" width="235" height="72" rx="8" fill="#f1f5f9" stroke="#334155" stroke-width="1.5" />
+                <text x="127" y="76" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="700">第 1 步</text>
+                <text x="127" y="98" text-anchor="middle" fill="#334155" font-size="12.5">看「立面線條與拱門輪廓」</text>
+                <line x1="245" y1="86" x2="271" y2="86" stroke="#475569" stroke-width="1.8" marker-end="url(#flow-arrow)" />
+
+                <rect x="275" y="50" width="195" height="72" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
+                <text x="372" y="75" text-anchor="middle" fill="#7c2d12" font-size="12">半圓拱＋大穹頂＋厚實牆面</text>
+                <text x="372" y="95" text-anchor="middle" fill="#7c2d12" font-size="11.5">（線條穩重渾厚、窗戶較小）</text>
+                <text x="372" y="114" text-anchor="middle" fill="#9a3412" font-size="11.5" font-weight="700">👉 古羅馬建築</text>
+
+                <rect x="490" y="50" width="195" height="72" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2" />
+                <text x="587" y="75" text-anchor="middle" fill="#1e3a8a" font-size="12">尖拱＋尖塔＋外側斜撐飛扶壁</text>
+                <text x="587" y="95" text-anchor="middle" fill="#1e40af" font-size="11.5">（整體垂直向上拔高）</text>
+                <text x="587" y="114" text-anchor="middle" fill="#1e3a8a" font-size="11.5" font-weight="700">👉 哥德式建築</text>
+
+                <rect x="705" y="50" width="205" height="72" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.2" />
+                <text x="807" y="75" text-anchor="middle" fill="#581c87" font-size="12">波浪曲線立面＋破裂式三角楣＋耳狀裝飾</text>
+                <text x="807" y="95" text-anchor="middle" fill="#6b21a8" font-size="11.5">（凹凸起伏、充滿動感）</text>
+                <text x="807" y="114" text-anchor="middle" fill="#6b21a8" font-size="11.5" font-weight="700">👉 巴洛克建築</text>
+
+                <!-- Arrow Step 1 -> Step 2 -->
+                <line x1="127" y1="122" x2="127" y2="144" stroke="#475569" stroke-width="2" marker-end="url(#flow-arrow)" />
+
+                <!-- Step 2 -->
+                <rect x="10" y="148" width="235" height="72" rx="8" fill="#f1f5f9" stroke="#334155" stroke-width="1.5" />
+                <text x="127" y="174" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="700">第 2 步</text>
+                <text x="127" y="196" text-anchor="middle" fill="#334155" font-size="12.5">看「採光與室內光影氛圍」</text>
+                <line x1="245" y1="184" x2="271" y2="184" stroke="#475569" stroke-width="1.8" marker-end="url(#flow-arrow)" />
+
+                <rect x="275" y="148" width="195" height="72" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
+                <text x="372" y="178" text-anchor="middle" fill="#7c2d12" font-size="12">厚牆小窗、空間穩固莊重</text>
+                <text x="372" y="206" text-anchor="middle" fill="#9a3412" font-size="11.5" font-weight="700">👉 古羅馬建築</text>
+
+                <rect x="490" y="148" width="195" height="72" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2" />
+                <text x="587" y="173" text-anchor="middle" fill="#1e3a8a" font-size="12">薄牆搭配超大面積「彩繪玻璃花窗」</text>
+                <text x="587" y="191" text-anchor="middle" fill="#1e40af" font-size="11.5">光線柔和詩意</text>
+                <text x="587" y="210" text-anchor="middle" fill="#1e3a8a" font-size="11.5" font-weight="700">👉 哥德式建築</text>
+
+                <rect x="705" y="148" width="205" height="72" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.2" />
+                <text x="807" y="173" text-anchor="middle" fill="#581c87" font-size="12">強烈明暗對比＋鍍金與鏡面反光</text>
+                <text x="807" y="191" text-anchor="middle" fill="#6b21a8" font-size="11.5">放射狀金色光輝與錯視法壁畫</text>
+                <text x="807" y="210" text-anchor="middle" fill="#6b21a8" font-size="11.5" font-weight="700">👉 巴洛克建築</text>
+
+                <!-- Arrow Step 2 -> Step 3 -->
+                <line x1="127" y1="220" x2="127" y2="242" stroke="#475569" stroke-width="2" marker-end="url(#flow-arrow)" />
+
+                <!-- Step 3 -->
+                <rect x="10" y="246" width="235" height="70" rx="8" fill="#f1f5f9" stroke="#334155" stroke-width="1.5" />
+                <text x="127" y="271" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="700">第 3 步</text>
+                <text x="127" y="293" text-anchor="middle" fill="#334155" font-size="12.5">看「建築用途與氣質」</text>
+                <line x1="245" y1="281" x2="271" y2="281" stroke="#475569" stroke-width="1.8" marker-end="url(#flow-arrow)" />
+
+                <rect x="275" y="246" width="195" height="70" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
+                <text x="372" y="271" text-anchor="middle" fill="#7c2d12" font-size="12">世俗公共設施與勝利紀念</text>
+                <text x="372" y="289" text-anchor="middle" fill="#7c2d12" font-size="11.5">（競技場、浴場、輸水渠、凱旋門）</text>
+                <text x="372" y="308" text-anchor="middle" fill="#9a3412" font-size="11.5" font-weight="700">👉 古羅馬建築</text>
+
+                <rect x="490" y="246" width="195" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2" />
+                <text x="587" y="276" text-anchor="middle" fill="#1e3a8a" font-size="12">高聳入雲的純粹宗教聖殿</text>
+                <text x="587" y="304" text-anchor="middle" fill="#1e3a8a" font-size="11.5" font-weight="700">👉 哥德式建築</text>
+
+                <rect x="705" y="246" width="205" height="70" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.2" />
+                <text x="807" y="271" text-anchor="middle" fill="#581c87" font-size="12">炫耀教權或皇室專制排場</text>
+                <text x="807" y="289" text-anchor="middle" fill="#6b21a8" font-size="11.5">（天主教教堂或奢華王宮）</text>
+                <text x="807" y="308" text-anchor="middle" fill="#6b21a8" font-size="11.5" font-weight="700">👉 巴洛克建築</text>
+              </svg>
+            </div>
+            <p class="diagram-caption">示意圖（AI 補充，非原始來源）</p>
+          </div>
+
+          <div class="section-box">
+            <h3>初學者 3 步驟實戰一眼辨識決策樹（AI 補充）</h3>
+            <ul class="bullet-list">
+              <li>
+                <strong>第 1 步：看「立面線條與拱門輪廓」</strong>
+                <ul class="sub-list">
+                  <li>半圓拱＋大穹頂＋厚實牆面（線條穩重渾厚、窗戶較小）👉 <strong>古羅馬建築</strong>（或承襲其厚牆圓拱特徵的羅曼式建築）</li>
+                  <li>尖拱＋尖塔＋外側斜撐飛扶壁（整體垂直向上拔高）👉 <strong>哥德式建築</strong></li>
+                  <li>波浪曲線立面＋破裂式三角楣＋耳狀裝飾（凹凸起伏、充滿動感）👉 <strong>巴洛克建築</strong></li>
+                </ul>
+              </li>
+              <li>
+                <strong>第 2 步：看「採光與室內光影氛圍」</strong>
+                <ul class="sub-list">
+                  <li>厚牆小窗、空間穩固莊重 👉 <strong>古羅馬建築</strong></li>
+                  <li>薄牆搭配超大面積「彩繪玻璃花窗」，光線柔和詩意 👉 <strong>哥德式建築</strong></li>
+                  <li>強烈明暗對比＋鍍金與鏡面反光，聖壇常有放射狀金色光輝與錯視法壁畫 👉 <strong>巴洛克建築</strong></li>
+                </ul>
+              </li>
+              <li>
+                <strong>第 3 步：看「建築用途與氣質」</strong>
+                <ul class="sub-list">
+                  <li>世俗公共設施與勝利紀念（競技場、浴場、輸水渠、凱旋門）👉 <strong>古羅馬建築</strong></li>
+                  <li>高聳入雲的純粹宗教聖殿 👉 <strong>哥德式建築</strong></li>
+                  <li>炫耀教權或皇室專制排場（天主教教堂或奢華王宮）👉 <strong>巴洛克建築</strong></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mnemonic-box">三欄對照速記口訣（AI 補充）：「羅馬厚牆圓拱頂，哥德尖塔飛扶壁，巴洛克曲線金光影。」</div>
+
+          <div class="warning-box">
+            <strong>判讀提醒（⚠️ 單一來源，可靠度較低）</strong>：巴洛克與洛可可等風格有時主要體現在室內空間，造成同一棟建築內外風格不一致，判讀時不能單憑外觀或室內單一元素判斷整體樣貌。
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：04-style-comparison.md</span>
+        <span>來源卡片：C67、C68、C62｜第 13 / 14 頁</span>
+      </footer>
+    </section>
+
+    <!-- P14 -->
+    <section class="slide theme-default" data-page="14">
+      <div>
+        <header class="slide-header">
+          <span class="style-badge">隨堂測驗與總結</span>
+          <h1 class="slide-title">P14｜隨堂小練習與重點回顧</h1>
+        </header>
+        <div class="slide-body">
+          <div class="section-box">
+            <h3>隨堂小練習：看地標特徵猜風格（AI 補充題型，事實與答案來自證據卡）</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div class="quiz-item">
+                <div><strong>題目 1</strong>：某座建築擁有世界上最大的無樑圓頂之一，上方有一處被稱為「上帝的眼睛」的天窗，這是哪種建築風格？</div>
+                <button type="button" class="toggle-ans-btn" onclick="toggleAnswer(this)">顯示 / 隱藏答案</button>
+                <div class="quiz-answer hidden"><strong>答案</strong>：<strong>古羅馬建築</strong>（代表地標：萬神殿，依據 C13、C67）。</div>
+              </div>
+              <div class="quiz-item">
+                <div><strong>題目 2</strong>：某座 1143 年在法國巴黎建成的教堂，首次以四尖券解決肋架拱頂結構問題，並擁有大面積花窗玻璃，這是哪種建築風格？</div>
+                <button type="button" class="toggle-ans-btn" onclick="toggleAnswer(this)">顯示 / 隱藏答案</button>
+                <div class="quiz-answer hidden"><strong>答案</strong>：<strong>哥德式建築</strong>（代表地標：聖丹尼斯教堂，依據 C34、C67）。</div>
+              </div>
+              <div class="quiz-item">
+                <div><strong>題目 3</strong>：某座羅馬教堂的天花板繪有壁畫，利用「四分視投影」讓建築和人物看起來好像向上延伸進天花板，這是哪種建築風格？</div>
+                <button type="button" class="toggle-ans-btn" onclick="toggleAnswer(this)">顯示 / 隱藏答案</button>
+                <div class="quiz-answer hidden"><strong>答案</strong>：<strong>巴洛克建築</strong>（代表地標：羅馬聖依納爵教堂，依據 C56、C67）。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-box">
+            <h3>三風格核心速記口訣總回顧（AI 補充）</h3>
+            <ul class="bullet-list">
+              <li>古羅馬：「競技場上圓拱疊，萬神殿頂望天眼，磚石泥漿築千年。」</li>
+              <li>哥德式：「尖拱骨架向上引，飛扶壁外撐，彩窗透天國。」</li>
+              <li>巴洛克：「立面起伏如波浪，強光濃影如劇場，錯視穹頂通天堂。」</li>
+            </ul>
+          </div>
+
+          <div class="section-box">
+            <h3>參考資料（證據卡出現之 raw 檔名與來源等級）</h3>
+            <ul class="bullet-list">
+              <li><code>raw/roman-wikipedia.md</code>（可靠度等級：A）</li>
+              <li><code>raw/roman-education.md</code>（可靠度等級：B）</li>
+              <li><code>raw/gothic-wikipedia.md</code>（可靠度等級：A）</li>
+              <li><code>raw/gothic-education.md</code>（可靠度等級：B）</li>
+              <li><code>raw/baroque-wikipedia.md</code>（可靠度等級：A）</li>
+              <li><code>raw/baroque-education-1.md</code>（可靠度等級：B）</li>
+              <li><code>raw/baroque-education-2.md</code>（可靠度等級：B）</li>
+              <li><code>raw/comparison-education-1.md</code>（可靠度等級：C｜⚠️ 單一來源，可靠度較低）</li>
+              <li><code>raw/comparison-education-2.md</code>（可靠度等級：C｜⚠️ 單一來源，可靠度較低）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer">
+        <span>來源：01-ancient-roman.md、02-gothic.md、03-baroque.md、04-style-comparison.md、index.md</span>
+        <span>來源卡片：C13、C19、C34、C38、C56、C60、C67｜第 14 / 14 頁</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <nav class="nav-bar" aria-label="簡報翻頁控制">
+    <button type="button" class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← 上一頁</button>
+    <span class="page-indicator" id="pageIndicator">1 / 14</span>
+    <button type="button" class="nav-btn" id="nextBtn" onclick="changeSlide(1)">下一頁 →</button>
+  </nav>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const pageIndicator = document.getElementById('pageIndicator');
+    let currentIndex = 0;
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentIndex);
+      });
+      pageIndicator.textContent = (currentIndex + 1) + ' / ' + slides.length;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === slides.length - 1;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeSlide(delta) {
+      const nextIndex = currentIndex + delta;
+      if (nextIndex >= 0 && nextIndex < slides.length) {
+        currentIndex = nextIndex;
+        updateSlide();
+      }
+    }
+
+    function toggleAnswer(btn) {
+      const ans = btn.nextElementSibling;
+      ans.classList.toggle('hidden');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+      }
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>
