@@ -1,0 +1,24 @@
+# 西式建築風格 LLM Wiki 導覽首頁
+
+歡迎來到「西式建築風格 LLM Wiki」！本知識庫專為完全沒學過建築的初學者量身打造，旨在以最白話、生動的方式拆解西方建築史的三大經典風格，並作為後續製作「教學 HTML 簡報」的完整結構化資料庫。
+
+---
+
+## 🗺️ 全站章節導覽
+
+* [01. 古羅馬建築（Ancient Roman Architecture）](file:///Users/zhangjialing/Desktop/LLM%20Wiki/wiki/01-ancient-roman.md)：【已完成審查】實用工程、混凝土革命、圓拱與公共建築。
+* [02. 哥德式建築（Gothic Architecture）](file:///Users/zhangjialing/Desktop/LLM%20Wiki/wiki/02-gothic.md)：【已完成審查】宗教崇高、垂直向上、尖肋拱頂、飛扶壁與花窗玻璃。
+* [03. 巴洛克建築（Baroque Architecture）](file:///Users/zhangjialing/Desktop/LLM%20Wiki/wiki/03-baroque.md)：【已完成審查】戲劇張力、動態曲線、強烈光影與情緒震撼。
+* [04. 三大建築風格綜合對照與一眼辨識指南](file:///Users/zhangjialing/Desktop/LLM%20Wiki/wiki/04-style-comparison.md)：【已完成審查】橫向對照表、3 步驟實戰辨識決策樹與代表地標速覽。
+* [工作日誌與更新紀錄（log.md）](file:///Users/zhangjialing/Desktop/LLM%20Wiki/wiki/log.md)：每次 Ingest 處理進度、Lint 審查結果與全庫結案稽核紀錄。
+
+---
+
+## ⏳ 建築風格歷史演變全景脈絡
+
+📌【AI 跨篇綜合整理，參考來源：raw/roman-wikipedia.md、raw/gothic-wikipedia.md、raw/baroque-wikipedia.md】
+
+```mermaid
+flowchart LR
+    A["🏛️ 古羅馬建築<br/>(西元前509 - 476年)<br/>實用工程 / 混凝土 / 圓拱"] --> B["⛪ 哥德式建築<br/>(12 - 16世紀)<br/>宗教崇高 / 尖拱 / 肋架拱頂"]
+    B --> C["🎭 巴洛克建築<br/>(17 - 18世紀)<br/>情緒震撼 / 扭轉曲線 / 戲劇光影"]
